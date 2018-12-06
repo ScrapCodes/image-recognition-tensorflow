@@ -190,7 +190,7 @@ model = keras.Sequential([
 
 ```
 ### Compile the model
-Optimizer is SGD, i.e. stochastic gradient descent. The details are alredy explained in tensorflow tutorial, so skipped in this blog.
+Optimizer is SGD, i.e. stochastic gradient descent. 
 
 ```python
 sgd = keras.optimizers.SGD(lr=0.01, decay=1e-5, momentum=0.7, nesterov=True)
@@ -229,8 +229,11 @@ Please note: accuracy of 1.0 indicates overfit. We will look into this later.
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
 ```
+
+```
 6/6 [==============================] - 0s 16ms/step
 ('Test accuracy:', 0.8333333134651184)
+```
 
 Test accuracy is less than training accuracy. This indicates model has overfit the data. There are techniques to overcome this problem, we will discuss those later. This model is a good example of the use of API, but very far from perfect.
 
@@ -254,9 +257,40 @@ print(predictions)
  [0.343152   0.656848  ]]
 ```
 
-Finally, lets see how our model evaluated on test set visually.
+Finally, lets display images and see how our model performed on test set.
 
 ```python
 display_images(test_images, np.argmax(predictions, axis = 1))
 ```
-<insert image>
+
+<img src="screenshot.png" alt="" width="500"/>
+
+We see one wrong classification in our result, as highlighted in the above image. One of the Chihuahua image, in our test set, is seen as a muffin by our neural network. So this stuff is far from perfect. In next article, we will see how we can improve things.
+ 
+Thanks, alot for going through. Please open issues for suggestions or feedback.
+
+## License:
+
+```python
+#@title MIT License
+#
+# Copyright (c) 2018 IBM
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+# DEALINGS IN THE SOFTWARE.
+```
