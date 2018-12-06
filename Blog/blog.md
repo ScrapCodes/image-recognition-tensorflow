@@ -5,7 +5,7 @@ This solution applies the same techniques as given in,
 
 [https://www.tensorflow.org/tutorials/keras/basic_classification](https://www.tensorflow.org/tutorials/keras/basic_classification).
 
-<img src="chihuahua-muffin/full.jpg" alt="" width="300"/>
+<img src="../chihuahua-muffin/full.jpg" alt="" width="300"/>
 
 ## Import the data.
 
