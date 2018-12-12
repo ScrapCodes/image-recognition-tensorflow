@@ -1,6 +1,7 @@
 # Solving a muffin or a Chihuahua, image recognition challenge with tensorflow and keras.
 
-Deep neural network or Deep learning has become very popular in last few years, thanks to all the breakthroughs in research. I wanted to use deep neural network for solving something other than hello world of image recognition i.e. MNIST handwritten letters recognition. After going through the first tutorial on tensorflow and keras library, this became the first image recognition challenge to solve. 
+Deep neural network or Deep learning has become very popular in last few years, thanks to all the breakthroughs in research. I wanted to use deep neural network for solving something other than hello world of image recognition i.e. MNIST handwritten letters recognition. After going through the first tutorial on tensorflow and keras library, this became the first image recognition challenge to solve. Since both are very similar looking objects, it appeared to be an interesting challenge.
+
 This solution applies the same techniques as given in, 
 
 [https://www.tensorflow.org/tutorials/keras/basic_classification](https://www.tensorflow.org/tutorials/keras/basic_classification).
@@ -84,7 +85,7 @@ def load_image_dataset(path_dir, maxsize):
 	return (np.asarray(images), np.asarray(labels))
 ```
 
-We should scale the images to some standard size smaller than actual image resolution. These images are about than 170x170 in size, so we scale them all to 100x100 for furthur processing.
+We should scale the images to some standard size smaller than actual image resolution. These images are more than 170x170 in size, so we scale them all to 100x100 for furthur processing.
 
 ```python
 maxsize = 100, 100
@@ -249,6 +250,7 @@ predictions = model.predict(test_images)
 
 ```
 print(predictions)
+
 [[0.730212   0.26978803]
  [0.5961833  0.40381673]
  [0.36453587 0.63546413]
