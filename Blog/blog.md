@@ -94,9 +94,9 @@ maxsize = 100, 100
 To load the data, let's execute these functions and load training and test data sets as follows.
 
 ```python
-(train_images, train_labels) = load_image_dataset('deep-learning-datasets/chihuahua-muffin', maxsize)
+(train_images, train_labels) = load_image_dataset('/Users/prashant/deep-learning-datasets/chihuahua-muffin', maxsize)
 
-(test_images, test_labels) = load_image_dataset('deep-learning-datasets/chihuahua-muffin/test_set', maxsize)
+(test_images, test_labels) = load_image_dataset('/Users/prashant/deep-learning-datasets/chihuahua-muffin/test_set', maxsize)
 
 ```
 
@@ -112,27 +112,27 @@ class_names = ['chihuahua', 'muffin']
 
 ## Explore the data
 
-In this dataset we have only 16 training examples, 8 of each Chihuahua and Muffin images.
+In this dataset we have total 26 training examples, of both Chihuahua and Muffin images.
 
 ```python
 train_images.shape
-(16, 100, 100)
+(26, 100, 100)
 ```
 
 Each image has it's respective label - either a `0` or `1`. A `0`indicates a `class_names[0]` i.e. a `chihuahua` and `1` indicates `class_names[1]` i.e. a `muffin`.
 
 ```python
 print(train_labels)
-[0 1 1 0 1 0 0 1 1 0 0 1 1 0 0 1]
+[0 0 0 0 1 1 1 1 1 0 1 0 0 1 1 0 0 1 1 0 1 1 0 1 0 0]
 ```
 
-For test set, we have got only 6 examples, 3 for each class.
+For test set, we have got 14 examples, 7 for each class.
 
 ```python
 test_images.shape
-(6, 100, 100)
+(14, 100, 100)
 print(test_labels)
-[0 0 0 1 1 1]
+[0 0 0 0 0 0 0 1 1 1 1 1 1 1]
 ```
 ### Visualize the dataset.
 
@@ -159,10 +159,11 @@ Let's visualize the training dataset, as follows :
 display_images(train_images, train_labels)
 plt.show()
 ```
-<insert image>
-Note: the images are greyscale and cropped, as we preprocessed our images at the time of loading.
+<img src="dataset.png" alt="" width="300"/>
 
-Similarly we can visualize our test data set. Our testing set is fairly limited, feel free to use google search and add more testing or even training examples and see how things improve or perform.
+Note: the images are greyscaled and cropped, in the pre-processing step of our images at the time of loading.
+
+Similarly we can visualize our test data set. Both training and test set are fairly limited, feel free to use google search and add more examples and see how things improve or perform.
 
 ## Preprocess the data
 
@@ -213,17 +214,14 @@ Last three training iterations appear as follows:
 
 ```
 ....
-16/16 [==============================] - 0s 884us/step - loss: 0.3056 - acc: 1.0000
 Epoch 98/100
-16/16 [==============================] - 0s 966us/step - loss: 0.3025 - acc: 1.0000
+26/26 [==============================] - 0s 555us/step - loss: 0.3859 - acc: 0.9231
 Epoch 99/100
-16/16 [==============================] - 0s 817us/step - loss: 0.2994 - acc: 1.0000
+26/26 [==============================] - 0s 646us/step - loss: 0.3834 - acc: 0.9231
 Epoch 100/100
-16/16 [==============================] - 0s 923us/step - loss: 0.2963 - acc: 1.0000
-<tensorflow.python.keras.callbacks.History object at 0x11f0f5250>
-
+26/26 [==============================] - 0s 562us/step - loss: 0.3809 - acc: 0.9231
+<tensorflow.python.keras.callbacks.History object at 0x11e6c9590>
 ```
-Please note: accuracy of 1.0 indicates overfit. We will look into this later.
 
 ## Evaluate accuracy
 ```python
@@ -232,8 +230,8 @@ print('Test accuracy:', test_acc)
 ```
 
 ```
-6/6 [==============================] - 0s 16ms/step
-('Test accuracy:', 0.8333333134651184)
+14/14 [==============================] - 0s 8ms/step
+('Test accuracy:', 0.7142857313156128)
 ```
 
 Test accuracy is less than training accuracy. This indicates model has overfit the data. There are techniques to overcome this problem, we will discuss those later. This model is a good example of the use of API, but very far from perfect.
@@ -251,18 +249,27 @@ predictions = model.predict(test_images)
 ```
 print(predictions)
 
-[[0.730212   0.26978803]
- [0.5961833  0.40381673]
- [0.36453587 0.63546413]
- [0.44840658 0.5515934 ]
- [0.24870424 0.75129575]
- [0.343152   0.656848  ]]
+[[0.6080283  0.3919717 ]
+ [0.5492342  0.4507658 ]
+ [0.54102856 0.45897144]
+ [0.6743213  0.3256787 ]
+ [0.6058993  0.39410067]
+ [0.472356   0.5276439 ]
+ [0.7122982  0.28770176]
+ [0.5260602  0.4739398 ]
+ [0.6514299  0.3485701 ]
+ [0.47610506 0.5238949 ]
+ [0.5501717  0.4498284 ]
+ [0.41266635 0.5873336 ]
+ [0.18961382 0.8103862 ]
+ [0.35493374 0.64506626]]
 ```
 
 Finally, lets display images and see how our model performed on test set.
 
 ```python
 display_images(test_images, np.argmax(predictions, axis = 1))
+plt.show()
 ```
 
 <img src="screenshot.png" alt="" width="500"/>
