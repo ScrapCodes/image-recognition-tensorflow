@@ -56,11 +56,11 @@ smaller_model1 = keras.models.Sequential([
 To determine the ideal model, we plot loss function of validation data against number of epochs.
 
 1. Comparison of Smaller, bigger and baseline models.
-<image src='model_size_comparison_plot2.png' alt="" width="500"/>
+<image src='model_size_comparision_plot2.png' alt="" width="500"/>
 
 2. Comparison of bigger, bigger2 and baseline models.
 
-<image src='model_size_comparison_plot3.png' alt="" width="500"/>
+<image src='model_size_comparision_plot3.png' alt="" width="500"/>
 
 In these plots it is observed, validation loss i.e. `sparse_categorical_crossentropy`, is almost similar for bigger and bigger2 models, however smaller and baseline models seemed to perform poorer in terms of minimizing the validation loss. So we go ahead and select these models over our baseline model for further tuning.
 
@@ -72,7 +72,7 @@ Number of epochs plays an important role in avoiding overfitting and overall mod
 
 The effect of applying L2 regularization to the layers.
 
-<image src='L2_regularization.png' alt="" width="500"/>
+<image src='L2_regularization.png' alt="" width="600"/>
 
 #### Using Dropout.
 
@@ -104,11 +104,11 @@ bigger_model2 = keras.models.Sequential([
 
 Effect of applying dropout regularization,
 
-<image src='dropout_regularization.png' alt="" width="500"/>
+<image src='dropout_regularization.png' alt="" width="600"/>
 
 During one of the run, the bigger model did not converge at all, even after 250 epochs. This is one of the side effects of applying dropout regularization.
 
-<image src='Model_No_converge.png' alt="" width="500"/>
+<image src='Model_No_converge.png' alt="" width="600"/>
 
 ### 2. Lack of training data.
 In a way with only 24 training examples, we have done reasonably well. But, for image processing there are several techniques of data augmentation by applying some distortion to original image and generating more data. For example, for every input image we can have a invert color image added to our dataset. So, to achieve this, the `load_image_dataset` function(_from previous blog article_) is modified as follows. It is also possible to add a randomly rotated image for each original image.
@@ -140,11 +140,11 @@ def load_image_dataset(path_dir, maxsize, reshape_size, invert_image=False):
 
 Effects of adding invert color images and randomly rotating images, on training with dropout on, is as follows.
 The size of dataset increased to 75 from 25, i.e. 3X.
-<image src='sigmoid_dropout_25.png' alt="" width="500"/>
+<image src='sigmoid_dropout_25.png' alt="" width="600"/>
 
 The result indicate, this has worsened the overfit of the data.
 
-_Please note: For data augmentation, keras provides a inbuilt utility, `keras.preprocessing.image.ImageDataGenerator`._
+_Please note: For data augmentation, keras provides a inbuilt utility, `keras.preprocessing.image.ImageDataGenerator`, it is out of scope for the blog._
 
 Another way to overcome the problem of less training data is to use a pretrained model and augment it with new training example. This approach is called transfer learning. Since tensorflow and keras provide a good mechanism for saving and loading models, this can be quite easily achieved. But out of scope for this blog.
 
@@ -152,7 +152,11 @@ Another way to overcome the problem of less training data is to use a pretrained
 The best results were observed by using sigmoid as activation function and dropout layer in our baseline model. A similar performance was observed with relu activation function, but with sigmoid, curve was smoother. Also the size of the image was reduced to 50x50, it improved the training time without impacting the performance of models.
 
 Apart from the above, I have also tested a VGG style multilayer CNN model, and multiple variations of CNN models, but somehow the results were very poor with it. 
-<image src='conclusion.png' alt="" width="500"/>
+
+Plot of the results from all the three models,
+<image src='conclusion.png' alt="" width="600"/>
+
+Baseline model used.
 
 ```python
 baseline_model = keras.models.Sequential([
@@ -179,6 +183,6 @@ Epoch 120/400
 
 Results:
 
-<image src='final_screenshot.png' alt="" width="500"/>
+<image src='final_screenshot.png' alt="" width="600"/>
 
 Next, I would like to improve my understandings of CNN and VGG style networks for image recognition and even more advanced usages of neural networks. 
