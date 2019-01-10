@@ -66,7 +66,7 @@ In these plots it is observed, validation loss i.e. `sparse_categorical_crossent
 
 #### Number of Epochs.
 
-Number of epochs plays an important role in avoiding overfitting and overall model performance, in the comparison graphs plotted in above section, we observe the loss function for validation data reaches a minimum and then on further training increases again, when loss function of training data reduces but, for validation data it increases. We have to stop, before the model overfits the data. So in above case `epoch` value of `40` would be ideal.
+Number of epochs plays an important role in avoiding overfitting and overall model performance, in the comparison graphs plotted in above section, we observe the loss function for validation data reaches a minimum and then on further training increases again, while loss function of training data reduces further. This is exactly what overfitting means, model learns patterns that are very specific to dataset and does not generalize well. So it does better with training data than validation data. We have to stop, before the model overfits the data. So in above case `epoch` value of `40` would be ideal.
 
 #### L1 and L2 Regularization.
 

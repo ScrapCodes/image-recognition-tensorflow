@@ -274,7 +274,7 @@ plt.show()
 
 <img src="screenshot.png" alt="" width="500"/>
 
-We see one wrong classification in our result, as highlighted in the above image. One of the Chihuahua image, in our test set, is seen as a muffin by our neural network. So this stuff is far from perfect. In next article, we will see how we can improve things.
+We see a few wrong classifications in our result, as highlighted in the above image. So this stuff is far from perfect. In next article, we will see how we can improve things.
  
 Thanks, alot for going through. Please open issues for suggestions or feedback.
 
