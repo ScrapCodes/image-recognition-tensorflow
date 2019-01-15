@@ -1,7 +1,7 @@
 
-# How to refine our machine learning model.
+# How to refine our deep learning model(Part 2 of [Solving a chihuahua or muffin](blog.md)).
 
-As part of my own learning, continuing from the [previous article](blog.md) improve our neural network model, by using some of the well known machine learning techniques mentioned in [https://www.tensorflow.org/tutorials/keras/](https://www.tensorflow.org/tutorials/keras/). 
+As part of my own learning, continuing from the [previous article](blog.md) and trying to improve our neural network model, by using some of the well known machine learning techniques mentioned in [https://www.tensorflow.org/tutorials/keras/](https://www.tensorflow.org/tutorials/keras/). 
 
 In the previous article, we have seen certain problems with our training. In this article we will address them and see if our results improve as we go.
 
@@ -62,7 +62,7 @@ To determine the ideal model, we plot loss function of validation data against n
 
 <image src='model_size_comparision_plot3.png' alt="" width="500"/>
 
-In these plots it is observed, validation loss i.e. `sparse_categorical_crossentropy`, is almost similar for bigger and bigger2 models, however smaller and baseline models seemed to perform poorer in terms of minimizing the validation loss. So we go ahead and select these models over our baseline model for further tuning.
+In these plots it is observed, validation loss i.e. `sparse_categorical_crossentropy`, is almost similar for `bigger` and `bigger2` models, and better than `smaller` and `baseline` models. So we go ahead and select these models over our `baseline` model for further tuning.
 
 #### Number of Epochs.
 
@@ -70,13 +70,13 @@ Number of epochs plays an important role in avoiding overfitting and overall mod
 
 #### L1 and L2 Regularization.
 
-The effect of applying L2 regularization to the layers.
+The effect of applying L2 regularization is that of adding some random noise to the layers. Plot below shows the effect of applying this on our model.
 
 <image src='L2_regularization.png' alt="" width="600"/>
 
 #### Using Dropout.
 
-Keras library provides a Dropout Layer, this concept was introduced by a paper _Dropout: A Simple Way to Prevent Neural Networks from Overfitting(JMLR 2014)_. Consequence of adding a dropout layer is the training time is increased and if the dropout is high then underfitting.
+Keras library provides a Dropout Layer, this concept was introduced by a paper _Dropout: A Simple Way to Prevent Neural Networks from Overfitting(JMLR 2014)_. Some negative consequences of adding a dropout layer is that, the training time is increased and if the dropout is high then underfitting.
 
 Models after applying the Dropout layers.
 
@@ -111,7 +111,7 @@ During one of the run, the bigger model did not converge at all, even after 250 
 <image src='Model_No_converge.png' alt="" width="600"/>
 
 ### 2. Lack of training data.
-In a way with only 24 training examples, we have done reasonably well. But, for image processing there are several techniques of data augmentation by applying some distortion to original image and generating more data. For example, for every input image we can have a invert color image added to our dataset. So, to achieve this, the `load_image_dataset` function(_from previous blog article_) is modified as follows. It is also possible to add a randomly rotated image for each original image.
+In a way with only 26 or so training examples, we have done reasonably well. But, for image processing there are several techniques of data augmentation by applying some distortion to original image and generating more data. For example, for every input image we can have a invert color image added to our dataset. So, to achieve this, the `load_image_dataset` function(_from previous blog article_) is modified as follows. It is also possible to add a randomly rotated image for each original image.
 
 ```python
 # invert_image if true, also stores an invert color version of each image in the training set.
@@ -139,7 +139,7 @@ def load_image_dataset(path_dir, maxsize, reshape_size, invert_image=False):
 ```
 
 Effects of adding invert color images and randomly rotating images, on training with dropout on, is as follows.
-The size of dataset increased to 75 from 25, i.e. 3X.
+The size of dataset increased by 3X.
 <image src='sigmoid_dropout_25.png' alt="" width="600"/>
 
 The result indicate, this has worsened the overfit of the data.
@@ -149,7 +149,7 @@ _Please note: For data augmentation, keras provides a inbuilt utility, `keras.pr
 Another way to overcome the problem of less training data is to use a pretrained model and augment it with new training example. This approach is called transfer learning. Since tensorflow and keras provide a good mechanism for saving and loading models, this can be quite easily achieved. But out of scope for this blog.
 
 ## Conclusion
-The best results were observed by using sigmoid as activation function and dropout layer in our baseline model. A similar performance was observed with relu activation function, but with sigmoid, curve was smoother. Also the size of the image was reduced to 50x50, it improved the training time without impacting the performance of models.
+On further testing with different models and activation functions, the best results were observed by using sigmoid as activation function and dropout layer in our baseline model. A similar performance was observed with relu activation function, but with sigmoid, curve was smoother. Also the size of the image was reduced to 50x50, it improved the training time without impacting the performance of models.
 
 Apart from the above, I have also tested a VGG style multilayer CNN model, and multiple variations of CNN models, but somehow the results were very poor with it. 
 

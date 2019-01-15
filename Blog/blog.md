@@ -1,10 +1,18 @@
 # Solving a muffin or a Chihuahua, image recognition challenge with tensorflow and keras.
 
-Deep neural network or Deep learning has become very popular in last few years, thanks to all the breakthroughs in research. I wanted to use deep neural network for solving something other than hello world of image recognition i.e. MNIST handwritten letters recognition. After going through the first tutorial on tensorflow and keras library, this became the first image recognition challenge to solve. Since both are very similar looking objects, it appeared to be an interesting challenge.
+Deep neural network or deep learning has become very popular in last few years, thanks to all the breakthroughs in research, starting from AlexNet[1], VGG[3], GoogleNet[4], ResNet[2]. With ResNet in year 2015, the performance of large scale image recognition saw a huge improvement in accuracy and thus contributed to popularity of deep neural network. 
+
+This blog only discusses a basic deep neural network, to solve a problem of image recognition, in this article emphasis is more on the overall technique and usage of library than perfecting the model. The next article [link](blog_refine_results.md) covers improving the results.
+
+I wanted to use deep neural network for solving something other than hello world of image recognition i.e. MNIST handwritten letters recognition. After going through the first tutorial on TensorFlow and Keras library, started a challenge of classifying whether a given image is a chihuahua (i.e. breed of a dog) or just a muffin, from a set of images which are very similar looking.
+
+The dataset included with this blog is formed by combining this [source](https://github.com/ieee8023/deep-learning-datasets/tree/master/chihuahua-muffin) and also searching the internet and applying some basic image processing techniques. The images in this dataset are collected, used and provided under the [Creative commons fair usage policy](https://guides.library.stonybrook.edu/copyright). The intended usage is, for scientific research in the area of image recognition using artificial neural networks, by using the TensorFlow and Keras library.
 
 This solution applies the same techniques as given in, 
 
 [https://www.tensorflow.org/tutorials/keras/basic_classification](https://www.tensorflow.org/tutorials/keras/basic_classification).
+
+Basically prerequisites to read this blog, are none. But if you want to follow the code, then basic knowledge of Python, `numpy` and going through the link above would be helpful.
 
 <img src="../chihuahua-muffin/full.jpg" alt="" width="300"/>
 
@@ -12,21 +20,22 @@ This solution applies the same techniques as given in,
 
 ### Git clone this repository.
 ```
-$ git clone https://github.com/ScrapCodes/deep-learning-datasets.git
-$ cd deep-learning-datasets
+$ git clone https://github.com/ScrapCodes/image-recognition-tensorflow.git
+$ cd image-recognition-tensorflow
 $ python 
 >>>
 ```
 
-### Import tensorflow, keras and other helper libraries. 
+### Import TensorFlow, Keras and other helper libraries. 
 
-In this blog, we have used `tensorflow` and `keras` for running machine learning and `Pillow` python library for image processing.
+In this blog, we have used `TensorFlow` and `Keras` for running machine learning and `Pillow` python library for image processing.
 
-Using pip these can be installed on Macos X as follows,
+Using pip these can be installed on macOS as follows,
 
 ```
 $ sudo pip install tensorflow matplotlib pillow
 ```
+_Note: Whether the use of sudo is required or not, depends on how python and pip is installed on your system. Systems configured with virtual environment may not need a sudo._
 
 Importing the python libraries. 
 
@@ -49,7 +58,7 @@ from PIL import Image
 
 ### Load the data
 
-A python function to preprocess input images. For images to be converted into numpy arrays, they must have same dimensions.
+A python function to preprocess input images. For images to be converted into `numpy` arrays, they must have same dimensions.
 
 ```python
 # Use Pillow library to convert an input jpeg to a 8 bit grey scale image array for processing.
@@ -67,7 +76,7 @@ def jpeg_to_8_bit_greyscale(path, maxsize):
 	return np.asarray(img)
 ```
 
-A python funciton to load the dataset from images, into numpy arrays.
+A python function to load the dataset from images, into `numpy` arrays.
 
 ```python
 def load_image_dataset(path_dir, maxsize):
@@ -85,7 +94,7 @@ def load_image_dataset(path_dir, maxsize):
 	return (np.asarray(images), np.asarray(labels))
 ```
 
-We should scale the images to some standard size smaller than actual image resolution. These images are more than 170x170 in size, so we scale them all to 100x100 for furthur processing.
+We should scale the images to some standard size smaller than actual image resolution. These images are more than 170x170 in size, so we scale them all to 100x100 for further processing.
 
 ```python
 maxsize = 100, 100
@@ -94,13 +103,13 @@ maxsize = 100, 100
 To load the data, let's execute these functions and load training and test data sets as follows.
 
 ```python
-(train_images, train_labels) = load_image_dataset('/Users/prashant/deep-learning-datasets/chihuahua-muffin', maxsize)
+(train_images, train_labels) = load_image_dataset('/Users/yourself/image-recognition-tensorflow/chihuahua-muffin', maxsize)
 
-(test_images, test_labels) = load_image_dataset('/Users/prashant/deep-learning-datasets/chihuahua-muffin/test_set', maxsize)
+(test_images, test_labels) = load_image_dataset('/Users/yourself/image-recognition-tensorflow/chihuahua-muffin/test_set', maxsize)
 
 ```
 
-* train_images and train lables is Training dataset
+* train_images and train lables is training dataset
 * test_images and test_labels is testing dataset for validating our model's performance against unseen data.
 
 
@@ -274,9 +283,19 @@ plt.show()
 
 <img src="screenshot.png" alt="" width="500"/>
 
-We see a few wrong classifications in our result, as highlighted in the above image. So this stuff is far from perfect. In next article, we will see how we can improve things.
+We see a few wrong classifications in our result, as highlighted in the above image. So this stuff is far from perfect. In next article [link](blog_refine_results.md), we will see how we can improve things.
  
 Thanks, alot for going through. Please open issues for suggestions or feedback.
+
+## Refrences
+
+[1]. A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems,pages1097–1105,2012.
+
+[2]. K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. arXiv preprint arXiv:1512.03385,2015.
+
+[3]. K. Simonyan and A. Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556,2014.
+
+[4]. C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition,pages 1–9,2015.
 
 ## License:
 
